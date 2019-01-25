@@ -18,9 +18,14 @@ use Robo\Contract\ConfigAwareInterface;
 /**
  * The Drush ProcessManager adds a few Drush-specific service methods.
  */
-class ProcessManager extends ConsolidationProcessManager implements ConfigAwareInterface
+class ProcessManager extends ConsolidationProcessManager
 {
-    use ConfigAwareTrait;
+    // TODO: We should finally move ConfigAware* to consolidation/config
+    // and fix up site-process to use it.
+    protected function getConfig()
+    {
+        return $this->config;
+    }
 
     /**
      * Run a Drush command on a site alias (or @self).
